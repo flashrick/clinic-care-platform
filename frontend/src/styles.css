@@ -1,0 +1,127 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color: #111a1f;
+  background: #f7f1e7;
+  font-family: "IBM Plex Sans", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 12% 10%, rgba(111, 246, 199, 0.42), transparent 38%),
+    radial-gradient(circle at 88% 86%, rgba(241, 110, 68, 0.35), transparent 45%),
+    #f7f1e7;
+}
+
+.app-shell {
+  position: relative;
+  min-height: 100vh;
+  padding: clamp(1rem, 2vw, 2rem);
+  display: grid;
+  place-items: center;
+}
+
+.grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.15;
+  background-image: radial-gradient(#1d2d35 0.5px, transparent 0.5px);
+  background-size: 3px 3px;
+}
+
+.hero-panel {
+  width: min(980px, 100%);
+  position: relative;
+  background: rgba(17, 26, 31, 0.95);
+  color: #f7f1e7;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: clamp(1.4rem, 3vw, 2.2rem);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
+  overflow: hidden;
+}
+
+.hero-panel::after {
+  content: "";
+  position: absolute;
+  inset: auto -20% -45% auto;
+  width: 380px;
+  height: 380px;
+  transform: rotate(-8deg);
+  background: linear-gradient(145deg, rgba(111, 246, 199, 0.5), rgba(241, 110, 68, 0.45));
+  filter: blur(45px);
+}
+
+.kicker {
+  margin: 0;
+  font-size: 0.88rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #6ff6c7;
+}
+
+.headline {
+  margin: 0.35rem 0 0;
+  line-height: 0.92;
+  font-size: clamp(3rem, 10vw, 6.5rem);
+  letter-spacing: 0.01em;
+}
+
+.subhead {
+  margin-top: 0.9rem;
+  max-width: 64ch;
+  color: rgba(247, 241, 231, 0.86);
+}
+
+.status-grid {
+  margin-top: 1.4rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 0.9rem;
+}
+
+.status-card {
+  position: relative;
+  border-radius: 12px;
+  padding: 0.9rem 1rem;
+  background: rgba(247, 241, 231, 0.08);
+  border: 1px solid rgba(247, 241, 231, 0.2);
+  z-index: 1;
+}
+
+.status-card h2 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.status-card p {
+  margin: 0.35rem 0 0;
+  color: rgba(247, 241, 231, 0.82);
+  font-size: 0.92rem;
+}
+
+.health-row {
+  margin-top: 1.2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.label {
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(247, 241, 231, 0.76);
+}

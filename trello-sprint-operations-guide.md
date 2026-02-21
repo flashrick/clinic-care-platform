@@ -77,111 +77,144 @@
 - 新建复盘改进卡，加入下个 Sprint 标签
 - 评审完成后归档已完成 Sprint 的历史卡片/清单
 
-## 4. 各 Sprint 的 Trello 具体操作
-## Sprint 1：基础搭建（Foundation / Docker / CI）
-### 开始前
-创建并准备以下卡片（统一打 `Sprint 1` 标签）：
-- Django/DRF 项目骨架
-- React/TypeScript 前端骨架
-- PostgreSQL 配置
-- Docker Compose（backend + db）
-- GitHub Actions 基线 + PyTest 基线
-- 健康检查接口 `/health`
+## 4. 各 Sprint 的 Trello 具体操作（中英文）
+### 4.1 中文版
+#### Sprint 1：基础搭建（Foundation / Docker / CI）
+开始前：
+- 创建并准备 `Sprint 1` 卡片：Django/DRF 骨架、React/TS 骨架、PostgreSQL、Docker Compose、GitHub Actions + PyTest、`/health`
+- 验收标准写成证据型：`docker compose up` 可运行、`/health` 返回 200、CI 绿灯
 
-为卡片写入证据型验收标准：
-- `docker compose up` 可运行
-- `/health` 返回 200
-- CI 绿灯
-
-### 进行中
+进行中：
 - 每日检查“骨架开发 -> 集成 -> 验证”链路是否连通
-- 若基础设施类卡片进入 `In Progress` 超过 1 天且无 PR，立即追踪
+- 基础设施卡在 `In Progress` 超过 1 天且无 PR，立即追踪
 
-### 收尾
-- 确认所有基线能力卡进入 `Done` 且有日志/截图证据
-- 将遗留优化项保留在 `Backlog`，并改为下个 Sprint 标签
+收尾：
+- 确认基线能力卡全部进入 `Done` 且有日志/截图证据
+- 遗留优化项保留在 `Backlog` 并改为下个 Sprint 标签
 
-## Sprint 2：认证与权限（JWT / RBAC）
-### 开始前
-创建并准备以下卡片（统一打 `Sprint 2` 标签）：
-- 注册/登录/刷新 Token 接口
-- 三角色定义（Patient/Doctor/Admin）
-- 受保护端点 RBAC 控制
-- 基础认证 UI
-- 认证与权限测试用例
+#### Sprint 2：认证与权限（JWT / RBAC）
+开始前：
+- 创建并准备 `Sprint 2` 卡片：注册/登录/刷新、角色定义、RBAC、认证 UI、认证与权限测试
+- 验收标准明确负向场景：401/403 行为正确
 
-在验收标准中明确负向场景：`401/403` 行为正确。
+进行中：
+- 认证卡必须附端点测试证据
+- 权限缺陷统一打 `security` 标签并提升优先级
 
-### 进行中
-- 所有认证卡必须附端点测试证据
-- 权限缺陷统一加 `security` 标签并提高优先级
+收尾：
+- 确认 JWT 签发正确
+- 确认受保护路由未授权/越权返回 401/403
+- 确认认证测试在 CI 通过
 
-### 收尾
-确认并留档：
-- 登录后可签发 JWT
-- 受保护路由未授权/越权时返回正确（401/403）
-- 认证测试在 CI 通过
+#### Sprint 3：预约 MVP（端到端）
+开始前：
+- 创建并准备 `Sprint 3` 卡片：预约 CRUD、医生日程、预约前端、表单校验、集成与回归
+- 验收标准加入数据隔离：患者只能看到自己的预约数据
 
-## Sprint 3：预约 MVP（端到端）
-### 开始前
-创建并准备以下卡片（统一打 `Sprint 3` 标签）：
-- 预约创建/查询/取消/改期 API
-- 医生日程视图 API/UI
-- 预约与日程前端页面
-- 表单校验（必填、过去时间不可预约）
-- 集成验证与回归检查
-
-在验收标准中加入数据隔离要求：患者只能看到自己的数据。
-
-### 进行中
-- 按“API -> UI -> 测试”链路追踪进度
+进行中：
+- 按“API -> UI -> 测试”链路跟踪
 - 集成阻塞卡当天升级处理，不跨天悬置
 
-### 收尾
-- 确认预约完整演示流程可跑通
-- 确认预约测试和回归结果都已附在对应卡片
+收尾：
+- 确认预约端到端演示可跑通
+- 确认预约测试和回归证据已附卡
 
-## Sprint 4：处方与病历
-### 开始前
-创建并准备以下卡片（统一打 `Sprint 4` 标签）：
-- 患者档案/病史最小模块
-- 医生开具处方流程
-- 患者只读处方历史
-- 医生/患者页面完善
-- 负向 RBAC 安全测试
-- Swagger 文档更新
+#### Sprint 4：处方与病历
+开始前：
+- 创建并准备 `Sprint 4` 卡片：患者档案/病史、医生开处方、患者只读历史、医生/患者页面、负向 RBAC 测试、Swagger 更新
 
-### 进行中
+进行中：
 - 未关联 PR 的卡片不得进入 `Code Review and Testing`
-- 权限相关缺陷标记 `security`，未修复前保持高优先级跟踪
+- 权限缺陷标记 `security` 并持续高优先级跟踪
 
-### 收尾
-确认并留档：
-- 医生可创建处方
-- 患者可读取本人处方历史
-- 非法访问被 403 拦截
-- Swagger 已同步更新
+收尾：
+- 确认医生可创建处方
+- 确认患者可读取本人处方历史
+- 确认非法访问被 403 拦截
+- 确认 Swagger 已同步更新
 
-## Sprint 5：语音记录 MVP + Te Reo + AWS 加固
-### 开始前
-创建并准备以下卡片（统一打 `Sprint 5` 标签）：
-- 语音转文本采集与保存
-- 关键页面 Te Reo Maori 切换
-- 缺陷修复与错误处理增强
-- 部署文档/环境变量完善
-- AWS EC2 + Compose 部署路径
-- 最终回归与发布检查
+#### Sprint 5：语音记录 MVP + Te Reo + AWS 加固
+开始前：
+- 创建并准备 `Sprint 5` 卡片：语音转文本、Te Reo Maori 切换、缺陷修复、部署文档/环境变量、AWS EC2 + Compose、最终回归
 
-### 进行中
-- 设立“部署就绪控制卡”，每天更新状态
+进行中：
+- 设立部署就绪控制卡并每日更新
 - 语音与多语言卡必须附演示证据
 
-### 收尾
-确认并留档：
-- 语音记录“录制/保存/查看”流程可用
-- 关键页面可切换 Te Reo Maori
-- AWS 部署证据完整
-- CI 保持绿灯
+收尾：
+- 确认语音“录制/保存/查看”可用
+- 确认关键页面可切换 Te Reo Maori
+- 确认 AWS 部署证据完整
+- 确认 CI 保持绿灯
+
+### 4.2 Sprint-by-Sprint Trello Playbook (English)
+#### Sprint 1 - Foundation (Scaffolding, Docker, CI Baseline)
+Kickoff:
+- Create and tag `Sprint 1` cards for backend scaffold, frontend scaffold, PostgreSQL setup, Docker Compose, CI bootstrap, and `/health`
+- Set evidence-based acceptance criteria: stack boots via `docker compose up`, health check returns 200, CI pipeline is green
+
+In-flight:
+- Run a daily flow check across scaffold -> integration -> verification
+- Escalate infra cards that sit in `In Progress` for more than one day without a linked PR
+
+Closeout:
+- Move only verifiable baseline cards to `Done` with logs/screenshots attached
+- Carry unfinished hardening work back to `Backlog` with the next sprint label
+
+#### Sprint 2 - Authentication and Authorization (JWT, RBAC)
+Kickoff:
+- Prepare `Sprint 2` cards for register/login/refresh, role model, RBAC enforcement, auth UI, and auth test coverage
+- Include explicit negative-path criteria for 401 and 403 responses
+
+In-flight:
+- Require endpoint-level test evidence on every auth card
+- Mark permission defects with `security` and treat them as high-priority blockers
+
+Closeout:
+- Validate token issuance on login
+- Validate authorization boundaries on protected routes (401/403)
+- Confirm auth tests are passing in CI
+
+#### Sprint 3 - Appointment MVP (End-to-End Booking Flow)
+Kickoff:
+- Prepare `Sprint 3` cards for appointment create/list/cancel/reschedule APIs, doctor schedule view, booking UI, validation rules, and integration/regression checks
+- Add data-isolation criteria so patients can access only their own records
+
+In-flight:
+- Track work as an API -> UI -> test pipeline
+- Escalate integration blockers the same day; no overnight carry within active blockers
+
+Closeout:
+- Verify the full booking flow is demo-ready
+- Attach regression and functional test evidence to completed cards
+
+#### Sprint 4 - Prescriptions and Patient Records
+Kickoff:
+- Prepare `Sprint 4` cards for patient profile/history, prescription authoring flow, patient read-only history view, role-based UI pages, negative RBAC tests, and Swagger updates
+
+In-flight:
+- Do not move cards into `Code Review and Testing` without linked PRs
+- Track authorization bugs under `security` until closure
+
+Closeout:
+- Verify doctors can issue prescriptions
+- Verify patients can read their own prescription history
+- Verify unauthorized access is blocked with 403
+- Verify API documentation is updated
+
+#### Sprint 5 - Voice Notes MVP, Te Reo Toggle, and AWS Hardening
+Kickoff:
+- Prepare `Sprint 5` cards for speech-to-text capture/storage, Te Reo toggle on key views, bug-fix and error-handling hardening, deployment docs/env setup, AWS EC2 + Compose path, and final regression sweep
+
+In-flight:
+- Maintain a deployment-readiness tracker card and update it daily
+- Require demo artifacts for voice-note and language-toggle cards
+
+Closeout:
+- Verify the record/save/view voice-note flow
+- Verify Te Reo toggle on target screens
+- Verify deployment evidence for AWS path
+- Keep CI green through sprint closure
 
 ## 5. 与 Scrum 仪式的 Trello 对应动作
 - `Sprint Planning`
