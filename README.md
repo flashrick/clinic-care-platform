@@ -43,6 +43,7 @@ docker compose up --build
 3. Open services:
 - Frontend: `http://localhost:5173`
 - Backend health: `http://localhost:8000/health`
+- Docker PostgreSQL (host): `localhost:5433` (configurable via `POSTGRES_HOST_PORT`)
 
 ## Quick Start (Without Docker)
 ### 1) PostgreSQL
@@ -74,6 +75,7 @@ npm run dev
 Use `.env.example` as a template.
 
 Required database variables:
+- `POSTGRES_HOST_PORT` (Docker host mapping, default `5433`)
 - `POSTGRES_HOST` (default `localhost`)
 - `POSTGRES_PORT` (default `5432`)
 - `POSTGRES_USER` (default `postgres`)
