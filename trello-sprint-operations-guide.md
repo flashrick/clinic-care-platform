@@ -4,29 +4,34 @@
 本手册用于说明在 Clinic Care Platform 项目中，Trello 管理者在每个 Sprint 需要执行的具体操作。
 
 - 交付节奏：5 周 / 5 个 Sprint（每 Sprint 1 周）
-- 看板流程：`Backlog -> Ready -> Sprint To Do -> In Progress -> Code Review -> Testing -> Done`
+- 精简看板流程：`Backlog -> In Progress -> Code Review and Testing -> Done`
 - 依据文档：`week9-full-project-pack.md`
 
 ## 2. Trello 看板固定配置
-### 2.1 列定义
-- `Backlog`：已提出但未准备好的需求卡
-- `Ready`：验收标准清晰、可被拉入 Sprint 的卡
-- `Sprint To Do`：当前 Sprint 已承诺的卡
-- `In Progress`：开发中
-- `Code Review`：PR 已提交，等待/进行评审
-- `Testing`：代码已合并，进入测试验证
-- `Done`：满足 DoD、可演示
+### 2.1 列定义（精简版）
+- `Backlog`：所有未完成事项（含待做、已承诺但未开工、下轮候选）
+- `In Progress`：已开工开发中的卡
+- `Code Review and Testing`：PR 评审与测试验证中的卡
+- `Done`：满足 DoD、可演示的卡
 
-### 2.2 卡片必填项
+### 2.2 在精简列下标记 Sprint 范围
+由于不再有 `Ready` 和 `Sprint To Do` 列，Sprint 承诺范围用卡片属性管理：
+- 标签：`Sprint 1` / `Sprint 2` / `Sprint 3` / `Sprint 4` / `Sprint 5`
+- 自定义字段（建议）：`Sprint`、`Priority`、`Estimate`
+- 截止日期：本 Sprint 最后一天
+
+说明：Sprint 期间，已承诺但尚未开工的卡片仍在 `Backlog`，通过 `Sprint X` 标签识别。
+
+### 2.3 卡片必填项
 每张用户故事卡必须包含：
 - 用户故事描述
 - 验收标准（Acceptance Criteria）
 - 负责人（`Tianxiang` / `Weizhao`）
 - PR/Commit 链接
 - DoD 检查清单
-- 标签（建议）：`backend`、`frontend`、`devops`、`qa`、`security`、`docs`、`blocked`
+- 标签（建议）：`backend`、`frontend`、`devops`、`qa`、`security`、`docs`、`blocked`、`Sprint X`
 
-### 2.3 标准检查清单（每卡复用）
+### 2.4 标准检查清单（每卡复用）
 1. `Implementation`
 - API/UI 功能完成
 - 关键校验和异常处理完成
@@ -49,19 +54,17 @@
 ### 3.1 Sprint 开始前（Planning 前后）
 - 清理 `Backlog`，拆分过大的卡片
 - 校验候选卡的验收标准是否清晰、可测试
-- 按优先级将卡片推进到 `Ready`
-- 创建本 Sprint 目标卡（放在 `Sprint To Do` 顶部）
-- 将已承诺卡片从 `Ready` 移入 `Sprint To Do`
+- 选出本 Sprint 承诺卡，统一打 `Sprint X` 标签
 - 补齐负责人、估时、截止日期
+- 创建本 Sprint Goal 卡（打 `Sprint X` 标签，置顶于 `Backlog`）
 - 将依赖与阻塞条件写入卡片描述
 
 ### 3.2 Sprint 进行中（日常管控）
 - 每日站会前进行一次看板巡检
-- 严格按退出规则移动卡片：
-  - `Sprint To Do -> In Progress`：实际开工
-  - `In Progress -> Code Review`：PR 已创建并已关联
-  - `Code Review -> Testing`：代码已合并且可测
-  - `Testing -> Done`：DoD 全部满足
+- 严格按规则移动卡片：
+  - `Backlog -> In Progress`：实际开工
+  - `In Progress -> Code Review and Testing`：PR 已创建并已关联
+  - `Code Review and Testing -> Done`：DoD 全部满足
 - 出现阻塞立即加 `blocked` 标签并注明解阻动作
 - 控制并行在制项（WIP），避免大量卡长期停留在 `In Progress`
 - 持续检查 PR 链接、测试结果、证据附件是否更新
@@ -69,14 +72,15 @@
 ### 3.3 Sprint 收尾（Review + Retro）
 - 逐张核验 `Done` 卡是否全部满足 DoD
 - 收集并补齐演示证据
-- 未完成卡按状态退回 `Backlog` 或 `Ready`，并写明当前进展与未完成原因
-- 新建复盘改进卡，放入下个 Sprint 的 `Ready`
+- 未完成的 `Sprint X` 卡保留在 `Backlog`，更新进展与剩余工作
+- 对延续到下个 Sprint 的卡，移除旧 `Sprint X` 标签并打新标签
+- 新建复盘改进卡，加入下个 Sprint 标签
 - 评审完成后归档已完成 Sprint 的历史卡片/清单
 
 ## 4. 各 Sprint 的 Trello 具体操作
 ## Sprint 1：基础搭建（Foundation / Docker / CI）
 ### 开始前
-创建并准备以下卡片：
+创建并准备以下卡片（统一打 `Sprint 1` 标签）：
 - Django/DRF 项目骨架
 - React/TypeScript 前端骨架
 - PostgreSQL 配置
@@ -95,11 +99,11 @@
 
 ### 收尾
 - 确认所有基线能力卡进入 `Done` 且有日志/截图证据
-- 将遗留优化项回写 `Backlog`
+- 将遗留优化项保留在 `Backlog`，并改为下个 Sprint 标签
 
 ## Sprint 2：认证与权限（JWT / RBAC）
 ### 开始前
-创建并准备以下卡片：
+创建并准备以下卡片（统一打 `Sprint 2` 标签）：
 - 注册/登录/刷新 Token 接口
 - 三角色定义（Patient/Doctor/Admin）
 - 受保护端点 RBAC 控制
@@ -120,7 +124,7 @@
 
 ## Sprint 3：预约 MVP（端到端）
 ### 开始前
-创建并准备以下卡片：
+创建并准备以下卡片（统一打 `Sprint 3` 标签）：
 - 预约创建/查询/取消/改期 API
 - 医生日程视图 API/UI
 - 预约与日程前端页面
@@ -139,7 +143,7 @@
 
 ## Sprint 4：处方与病历
 ### 开始前
-创建并准备以下卡片：
+创建并准备以下卡片（统一打 `Sprint 4` 标签）：
 - 患者档案/病史最小模块
 - 医生开具处方流程
 - 患者只读处方历史
@@ -148,7 +152,7 @@
 - Swagger 文档更新
 
 ### 进行中
-- 未关联 PR 的卡片不得进入 `Code Review`
+- 未关联 PR 的卡片不得进入 `Code Review and Testing`
 - 权限相关缺陷标记 `security`，未修复前保持高优先级跟踪
 
 ### 收尾
@@ -160,7 +164,7 @@
 
 ## Sprint 5：语音记录 MVP + Te Reo + AWS 加固
 ### 开始前
-创建并准备以下卡片：
+创建并准备以下卡片（统一打 `Sprint 5` 标签）：
 - 语音转文本采集与保存
 - 关键页面 Te Reo Maori 切换
 - 缺陷修复与错误处理增强
@@ -181,9 +185,8 @@
 
 ## 5. 与 Scrum 仪式的 Trello 对应动作
 - `Sprint Planning`
-  - 建立 Sprint Goal 卡
-  - 确认承诺范围并移动到 `Sprint To Do`
-  - 校验卡片完整性（AC/Owner/Estimate）
+  - 确认本 Sprint 卡片并打 `Sprint X` 标签
+  - 校验卡片完整性（AC/Owner/Estimate/Due Date）
 
 - `Daily Stand-up`
   - 更新卡片状态与阻塞说明
@@ -192,7 +195,7 @@
 - `Backlog Refinement`
   - 拆分大卡
   - 细化验收标准
-  - 调整优先级并推进到 `Ready`
+  - 调整优先级，准备下个 Sprint 候选卡
 
 - `Sprint Review`
   - 只基于 `Done` 卡演示
@@ -200,7 +203,7 @@
 
 - `Retrospective`
   - 新建流程改进卡
-  - 放入下 Sprint 的 `Ready`
+  - 打上下一 Sprint 标签
 
 ## 6. `Done` 列准入规则（DoD Gate）
 卡片只有在以下条件全部满足时才能移动到 `Done`：
@@ -211,10 +214,10 @@
 - 验收标准满足并可演示
 
 ## 7. 每个 Sprint 可复用的管理员检查单
-1. Sprint 目标卡已创建
-2. 本 Sprint 范围卡已从 `Ready` 移入 `Sprint To Do`
-3. 每张卡 AC、负责人、估时、截止日期完整
-4. DoD 清单已挂载到每张卡
-5. 每日看板巡检节奏已执行
-6. Review 证据收集方案已落实
-7. Retro 改进行动卡已创建
+1. 本 Sprint 承诺卡已筛选并打 `Sprint X` 标签
+2. 每张卡 AC、负责人、估时、截止日期完整
+3. DoD 清单已挂载到每张卡
+4. 每日看板巡检节奏已执行
+5. Review 证据收集方案已落实
+6. 未完成卡已更新状态并改标到下个 Sprint
+7. Retro 改进行动卡已创建并打下 Sprint 标签
